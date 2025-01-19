@@ -3,21 +3,22 @@ kind: Deployment
 metadata:
   name: postgres-deployment
 spec:
-  replicas: 1
+  replicas: 1 # Apenas uma réplica para este exemplo.
   selector:
     matchLabels:
       app: database
   template:
     metadata:
       labels:
-        app: database
+        app: database # Garante que este pod é associado ao serviço "postgres-service"
     spec:
       containers:
       - name: postgres
         image: postgres:17
         ports:
-          - containerPort: 5432
+          - containerPort: 5432 # Porta padrão do PostgreSQL
         env:
+          # Variáveis de ambiente para configuração do PostgreSQL
           - name: POSTGRES_PASSWORD
             value: "odoo"
           - name: POSTGRES_USER
@@ -25,9 +26,11 @@ spec:
           - name: POSTGRES_DB
             value: "postgres"
         volumeMounts:
+          # Monta o volume persistente para armazenar dados do PostgreSQL
           - name: postgres-data
             mountPath: /var/lib/postgresql/data
       volumes:
+        # Define o volume como um PVC
         - name: postgres-data
           persistentVolumeClaim:
             claimName: postgres-pvc

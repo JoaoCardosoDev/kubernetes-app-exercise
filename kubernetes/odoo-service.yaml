@@ -3,9 +3,9 @@ kind: Service
 metadata:
   name: odoo-service
 spec:
-  type: ClusterIP
+  type: ClusterIP # Serviço acessível apenas dentro do cluster
   ports:
-    - port: 8069
-      targetPort: 8069
+    - port: 8069 # Porta exposta pelo serviço
+      targetPort: 8069 # Porta correspondente no container Odoo
   selector:
-    app: odoo
+    app: odoo # Associa o serviço aos pods

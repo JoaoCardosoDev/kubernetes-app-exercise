@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: postgres-config
 data:
+  # Configuração básica para o PostgreSQL: palavra-passe, utilizador e nome da base de dados
   POSTGRES_PASSWORD: odoo
   POSTGRES_USER: odoo
   POSTGRES_DB: postgres

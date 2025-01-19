@@ -4,7 +4,7 @@ metadata:
   name: postgres-pvc
 spec:
   accessModes:
-    - ReadWriteOnce 
+    - ReadWriteOnce # Permite que o volume seja montado por um único nó em modo de leitura e escrita de cada vez
   resources:
     requests:
-      storage: 1Gi  
+      storage: 1Gi

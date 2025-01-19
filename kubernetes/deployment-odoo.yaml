@@ -3,21 +3,22 @@ kind: Deployment
 metadata:
   name: odoo-deployment
 spec:
-  replicas: 2
+  replicas: 2 # Define duas réplicas para garantir maior disponibilidade
   selector:
     matchLabels:
       app: odoo
   template:
     metadata:
       labels:
-        app: odoo
+        app: odoo # Garante que o serviço possa identificar os pods Odoo corretamente
     spec:
       containers:
       - name: odoo
         image: odoo:18
         ports:
-          - containerPort: 8069
+          - containerPort: 8069 # Porta padrão do Odoo
         env:
+          # Configuração de conexão com a base de dados PostgreSQL
           - name: HOST
             value: "postgres-service"
           - name: PORT
@@ -27,6 +28,7 @@ spec:
           - name: PASSWORD
             value: "odoo"
       volumes:
+        # Liga o ConfigMap do Odoo a este deployment
         - name: odoo-config
           configMap:
             name: odoo-config

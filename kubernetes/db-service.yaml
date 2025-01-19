@@ -3,9 +3,12 @@ kind: Service
 metadata:
   name: postgres-service
 spec:
+  # O tipo ClusterIP garante que o serviço é acessível só dentro do cluster
   type: ClusterIP
   ports:
+    # Porta padrão do PostgreSQL
     - port: 5432
       targetPort: 5432
   selector:
+    # Associa este serviço aos pods com a label "app: database"
     app: database
